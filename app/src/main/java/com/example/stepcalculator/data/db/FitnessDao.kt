@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.stepcalculator.data.db.entity.FITNESS_ID
 import com.example.stepcalculator.data.db.entity.FitnessData
+import com.example.stepcalculator.data.network.response.FitnessResponse
 
 @Dao
 interface FitnessDao {
@@ -15,5 +16,5 @@ interface FitnessDao {
     fun upsert(fitnessEntry: FitnessData)
 
     @Query("Select * from fitness_record where id= $FITNESS_ID")
-    fun getFitnessData(): LiveData<FitnessData>
+    fun getFitnessData(): LiveData<FitnessResponse>
 }

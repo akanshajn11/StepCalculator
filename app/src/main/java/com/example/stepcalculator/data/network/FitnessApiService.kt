@@ -1,4 +1,4 @@
-package com.example.stepcalculator.data
+package com.example.stepcalculator.data.network
 
 import com.example.stepcalculator.data.network.response.FitnessResponse
 import retrofit2.Call
