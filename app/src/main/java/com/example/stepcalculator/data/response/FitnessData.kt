@@ -1,4 +1,4 @@
-package com.example.stepcalculator.data
+package com.example.stepcalculator.data.response
 
 
 import com.google.gson.annotations.SerializedName

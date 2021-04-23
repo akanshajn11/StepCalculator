@@ -1,5 +1,6 @@
-package com.example.stepcalculator.data
+package com.example.stepcalculator.data.response
 
+import com.example.stepcalculator.data.response.FitnessData
 import com.google.gson.annotations.SerializedName
 
 
