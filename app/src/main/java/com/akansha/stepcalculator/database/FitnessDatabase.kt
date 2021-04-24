@@ -1,11 +1,10 @@
-package com.example.stepcalculator.data.db
+package com.akansha.stepcalculator.database
 
 import android.content.Context
 import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.stepcalculator.data.db.entity.FitnessData
 
 @Database(entities = [FitnessData::class], version = 1)
 abstract class FitnessDatabase : RoomDatabase() {
@@ -21,7 +20,6 @@ abstract class FitnessDatabase : RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    Log.d("anku","instance isnull")
 
                     instance = Room.databaseBuilder(
                         context,
@@ -32,7 +30,6 @@ abstract class FitnessDatabase : RoomDatabase() {
                         .build()
                     INSTANCE = instance
                 }
-                Log.d("anku",instance.toString())
 
                 return instance
             }

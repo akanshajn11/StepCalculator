@@ -1,4 +1,4 @@
-package com.example.stepcalculator.data.db.entity
+package com.akansha.stepcalculator.database
 
 
 import androidx.room.ColumnInfo
@@ -31,8 +31,4 @@ data class FitnessData(
     @ColumnInfo(name = "training_time")
     val trainingTime: String
 
-
-) {
-//    @PrimaryKey(autoGenerate = false)
-//    val id: Int = FITNESS_ID
-}
+)
