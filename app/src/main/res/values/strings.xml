@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">StepCalculator</string>
+    <string name="app_name">Step Calculator</string>
+    <string name="greeting_1">Good Morning, Akansha</string>
+    <string name="greeting_2">Have a great day Ahead! </string>
+    <string name="steps_card_title">Walking Step Counter</string>
+    <string name="sleep_card_title">Sleeping Time</string>
+    <string name="heart_card_title">Heart Rate</string>
+    <string name="training_card_title">Training Time</string>
 </resources>

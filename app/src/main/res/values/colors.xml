@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="steps_view_color">#e4f2f7</color>
+    <color name="heart_view_color">#dda0dd</color>
+    <color name="sleep_view_color">#add8e6</color>
+    <color name="training_view_color">#90ee90</color>
 </resources>
