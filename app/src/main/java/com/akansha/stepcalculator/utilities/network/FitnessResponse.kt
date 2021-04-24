@@ -1,6 +1,6 @@
-package com.example.stepcalculator.data.network.response
+package com.akansha.stepcalculator.utilities.network
 
-import com.example.stepcalculator.data.db.entity.FitnessData
+import com.akansha.stepcalculator.database.FitnessData
 import com.google.gson.annotations.SerializedName
 
 
@@ -9,4 +9,4 @@ data class FitnessResponse(
     @SerializedName("data")
     var fitnessData: FitnessData
 
-    )
+)

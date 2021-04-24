@@ -1,6 +1,5 @@
-package com.example.stepcalculator.data.network
+package com.akansha.stepcalculator.utilities.network
 
-import com.example.stepcalculator.data.network.response.FitnessResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
