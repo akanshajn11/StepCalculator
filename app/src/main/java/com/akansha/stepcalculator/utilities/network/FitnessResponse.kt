@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
 data class FitnessResponse(
 
     @SerializedName("data")
-    val fitnessData: FitnessData,
+    var fitnessData: FitnessData
 
     )

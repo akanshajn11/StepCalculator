@@ -1,6 +1,7 @@
 package com.example.stepcalculator.data.db
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,24 +17,25 @@ abstract class FitnessDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: FitnessDatabase? = null
 
-        fun getInstance(context: Context): FitnessDatabase {
-
+        fun getInstance(context: Context): FitnessDatabase? {
             synchronized(this) {
                 var instance = INSTANCE
-
                 if (instance == null) {
+                    Log.d("anku","instance isnull")
+
                     instance = Room.databaseBuilder(
                         context,
                         FitnessDatabase::class.java,
                         "fitness_database"
-                    ).build()
+                    ).fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
+                        .build()
                     INSTANCE = instance
                 }
+                Log.d("anku",instance.toString())
 
                 return instance
             }
-
         }
     }
-
 }

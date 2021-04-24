@@ -16,7 +16,7 @@ interface FitnessApiService {
 
 object FitnessApi {
 
-    val fitnessService: FitnessApiService by lazy {
+    val shared: FitnessApiService by lazy {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)

@@ -16,5 +16,8 @@ interface FitnessDao {
     fun upsert(fitnessEntry: FitnessData)
 
     @Query("Select * from fitness_record where id= $FITNESS_ID")
-    fun getFitnessData(): LiveData<FitnessResponse>
+    fun getFitnessData(): FitnessData?
+
+    @Query("Select steps from fitness_record where id= $FITNESS_ID")
+    fun getSteps() : Int
 }
