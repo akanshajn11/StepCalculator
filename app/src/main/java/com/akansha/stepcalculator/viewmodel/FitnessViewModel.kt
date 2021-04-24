@@ -1,17 +1,14 @@
-package com.example.stepcalculator.viewmodel
+package com.akansha.stepcalculator.viewmodel
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.stepcalculator.data.db.FitnessDao
-import com.example.stepcalculator.data.network.FitnessApi
-import com.example.stepcalculator.data.db.FitnessDatabase
-import com.example.stepcalculator.data.db.entity.FitnessData
-import com.example.stepcalculator.data.network.response.FitnessResponse
-import com.example.stepcalculator.utilities.StepCounter
-import kotlinx.coroutines.*
+import com.akansha.stepcalculator.database.FitnessDao
+import com.akansha.stepcalculator.database.FitnessData
+import com.akansha.stepcalculator.utilities.network.FitnessApi
+import com.akansha.stepcalculator.database.FitnessDatabase
+import com.akansha.stepcalculator.utilities.network.FitnessResponse
+import com.akansha.stepcalculator.utilities.sensor.StepCounter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,42 +22,30 @@ class FitnessViewModel(private val app: Application) : AndroidViewModel(app) {
     val fitnessData: LiveData<FitnessData>
         get() = _liveFitnessData
 
-    private var _fitnessDataDb = MutableLiveData<FitnessData>()
+    private var _steps = MutableLiveData<Int>()
 
-    val fitnessDataDb: LiveData<FitnessData>
-        get() = _fitnessDataDb
-
-
-    private val _formattedSteps = MutableLiveData<Int>()
-
-    val formattedSteps: LiveData<Int>
-        get() = _formattedSteps
+    val steps: LiveData<Int>
+        get() = _steps
 
     private val stepCounter: StepCounter = StepCounter(app.applicationContext)
 
-    private var cachedSteps : Int =0
-
     init {
-      cachedSteps=getSteps()
 
         stepCounter.steps.observeForever {
-            this._formattedSteps.value = getSteps()+it
-            _liveFitnessData.value?.steps = _formattedSteps.value ?: 0
+            _steps.value = getSavedSteps() + it -1
+            _liveFitnessData.value?.steps = _steps.value ?: 0
         }
         appDb = FitnessDatabase.getInstance(app.applicationContext)?.fitnessDao
 
     }
 
-    fun getFitnessData() {
+    private fun getFitnessData() {
         FitnessApi.shared.getFitnessData().enqueue(object : Callback<FitnessResponse> {
             override fun onResponse(
                 call: Call<FitnessResponse>,
                 response: Response<FitnessResponse>
             ) {
-                if (response.isSuccessful && response.body() != null) {
-                    _liveFitnessData.value = response.body()?.fitnessData
-                    //              _liveFitnessData.value?.fitnessData?.let { appDb?.upsert(it) }
-                }
+                _liveFitnessData.value = response.body()?.fitnessData
             }
 
             override fun onFailure(call: Call<FitnessResponse>, t: Throwable) {
@@ -69,17 +54,13 @@ class FitnessViewModel(private val app: Application) : AndroidViewModel(app) {
                     "Network failure!!",
                     Toast.LENGTH_SHORT
                 ).show()
-
             }
         })
-
     }
 
     fun saveData() {
-        val fitnessData: FitnessData? = _liveFitnessData.value
 
-        _liveFitnessData.value?.steps= _formattedSteps.value ?:0
-        //     fitnessData?.steps=_formattedSteps.value?:0
+        val fitnessData: FitnessData? = _liveFitnessData.value
         if (fitnessData != null) {
             appDb?.upsert(fitnessData)
         }
@@ -87,23 +68,18 @@ class FitnessViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun getData() {
 
-        //first check the cached data
-        var fitnessData: FitnessData? = null
-        fitnessData = appDb?.getFitnessData()
-        // _liveFitnessData= appDb?.getFitnessData() as MutableLiveData<FitnessData>
-
-        if (fitnessData == null) {
-
-             getFitnessData()
-        }
-        else{
-            _liveFitnessData.value=fitnessData
-        }
+        //check for cached data
+        _steps.value=getSavedSteps()
+        val fitnessData: FitnessData? = appDb?.getFitnessData()
+        if (fitnessData == null)
+            getFitnessData()
+        else
+            _liveFitnessData.value = fitnessData
     }
 
-    private fun getSteps():Int{
+    private fun getSavedSteps(): Int {
 
-       return appDb?.getSteps() ?: 0;
+        return appDb?.getSavedSteps() ?: 0;
 
     }
 }
