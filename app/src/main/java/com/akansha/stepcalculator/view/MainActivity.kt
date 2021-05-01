@@ -1,18 +1,15 @@
 package com.akansha.stepcalculator.view
 
 import android.animation.ObjectAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.GridView
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.akansha.stepcalculator.R
-import com.akansha.stepcalculator.database.FitnessData
 import com.akansha.stepcalculator.viewmodel.FitnessViewModel
 import com.akansha.stepcalculator.viewmodel.FitnessViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,4 +56,5 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         viewModel.getData()
     }
+
 }
