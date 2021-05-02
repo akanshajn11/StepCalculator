@@ -37,13 +37,11 @@
         android:id="@+id/steps_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="80dp"
         android:layout_marginEnd="5dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@id/sleep_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greeting2">
+        app:layout_constraintStart_toEndOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_top">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -105,12 +103,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="40dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/steps_card"
-        app:layout_constraintTop_toBottomOf="@+id/greeting2">
+        app:layout_constraintTop_toBottomOf="@+id/guideline_top">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -158,12 +154,11 @@
         android:id="@+id/heart_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@id/training_card"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/steps_card">
 
         <RelativeLayout
@@ -205,6 +200,7 @@
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -214,9 +210,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/heart_card"
         app:layout_constraintTop_toBottomOf="@+id/sleep_card">
 
@@ -261,4 +256,27 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
